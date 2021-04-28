@@ -9,7 +9,8 @@ import { useGLTF } from '@react-three/drei'
 
 export default function Model(props) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('/array.glb')
+  const { nodes } = useGLTF('/array-processed.glb')
+
   useFrame((state) => {
     group.current.children.forEach((child, index) => {
       child.position.y += Math.sin(index * 1000 + state.clock.elapsedTime) / 50
@@ -24,22 +25,25 @@ export default function Model(props) {
         color: '#0a0a0a',
         roughness: 0.8,
       })
-    : nodes.Curve001.material
+    : nodes.Cube.material
 
   return (
     <group ref={group} {...props} dispose={null}>
-      <mesh castShadow receiveShadow geometry={nodes.Cube007.geometry} material={material}>
-        <mesh castShadow receiveShadow geometry={nodes.Text.geometry} material={material} />
-        <mesh castShadow receiveShadow geometry={nodes.Text001.geometry} material={material} />
-        <mesh castShadow receiveShadow geometry={nodes.Text002.geometry} material={material} />
-        <mesh castShadow receiveShadow geometry={nodes.Text003.geometry} material={material} />
-      </mesh>
-      <mesh castShadow receiveShadow geometry={nodes.Plane.geometry} material={material} />
-      <mesh castShadow receiveShadow geometry={nodes.Cube.geometry} material={material} />
-      <mesh castShadow receiveShadow geometry={nodes.Curve.geometry} material={material} />
-      <mesh castShadow receiveShadow geometry={nodes.Curve001.geometry} material={material} />
+      <group>
+        <mesh castShadow receiveShadow geometry={nodes.Cube.geometry} material={material} />
+        <mesh castShadow receiveShadow geometry={nodes.Cylinder.geometry} material={material} />
+      </group>
+      <mesh castShadow receiveShadow geometry={nodes.laptop.geometry} material={material}></mesh>
+      <mesh castShadow receiveShadow geometry={nodes.open_square.geometry} material={material} />
+      <mesh castShadow receiveShadow geometry={nodes.squiare.geometry} material={material} />
+      <mesh castShadow receiveShadow geometry={nodes.curly.geometry} material={material} />
+      <mesh castShadow receiveShadow geometry={nodes.curly001.geometry} material={material} />
+
+      <mesh castShadow receiveShadow geometry={nodes.node.geometry} material={material} />
+      <mesh castShadow receiveShadow geometry={nodes.react.geometry} material={material} />
+      <mesh castShadow receiveShadow geometry={nodes.vue.geometry} material={material} />
     </group>
   )
 }
 
-useGLTF.preload('/array.glb')
+useGLTF.preload('/array-processed.glb')
