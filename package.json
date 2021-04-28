@@ -1,0 +1,35 @@
+{
+  "name": "baked-ao",
+  "version": "1.0.0",
+  "description": "Making the contents of a GLTF float and some Blender baking.",
+  "keywords": [
+    "baked",
+    "ambient-occlusion",
+    "floating"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/drei": "4.0.3",
+    "@react-three/fiber": "6.0.7",
+    "@types/three": "0.127.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-scripts": "4.0.3",
+    "three": "0.127.0"
+  },
+  "devDependencies": {
+    "typescript": "3.8.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
