@@ -3,13 +3,18 @@ import React, { Suspense, useEffect, useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { ContactShadows } from '@react-three/drei'
 import Model from './Model'
-import Sparkles from './Sparkles'
+import Sparkles from './Components/Sparkles'
+import usePrefersReducedMotion from './Hooks/usePreferesReducedMotion'
 
 function Rig({ children }) {
   const ref = useRef()
+  const prefersReducedMotion = usePrefersReducedMotion()
+
   useFrame((state) => {
-    ref.current.rotation.y = THREE.MathUtils.lerp(ref.current.rotation.y, (state.mouse.x * Math.PI) / 20, 0.05)
-    ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, (state.mouse.y * Math.PI) / 20, 0.05)
+    if (!prefersReducedMotion) {
+      ref.current.rotation.y = THREE.MathUtils.lerp(ref.current.rotation.y, (state.mouse.x * Math.PI) / 20, 0.05)
+      ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, (state.mouse.y * Math.PI) / 20, 0.05)
+    }
   })
   return <group ref={ref}>{children}</group>
 }
@@ -17,6 +22,9 @@ function Rig({ children }) {
 export default function App() {
   const [dark, setDark] = useState(false)
   const [done, setDone] = useState(true)
+  const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     if (dark) {
@@ -25,6 +33,26 @@ export default function App() {
       document.body.classList.remove('dark')
     }
   }, [dark])
+
+  const submitForm = async (e) => {
+    setError(false)
+    setLoading(true)
+    try {
+      e.preventDefault()
+      await fetch('https://app.convertkit.com/forms/2236430/subscriptions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `email_address=${email}`,
+      })
+      setLoading(false)
+    } catch {
+      setLoading(false)
+      setError(true)
+    }
+  }
+
   return (
     <>
       <Canvas camera={{ position: [0, -10, 65], fov: 50 }} dpr={[1, 2]}>
@@ -47,7 +75,7 @@ export default function App() {
           </group>
         </Suspense>
       </Canvas>
-      <main class="w-full h-full absolute top-0 left-0 flex justify-center align-center flex-col pointer-events-none">
+      <main className="w-full h-full absolute top-0 left-0 flex justify-center align-center flex-col pointer-events-none">
         <h1 href="/" className="absolute left-5 top-5 md:left-10 md:top-10 right-auto font-bold">
           arrayftw.com
         </h1>
@@ -58,7 +86,7 @@ export default function App() {
           /instructor
         </a>
         <h2 className="text-3xl md:text-7xl text-center uppercase p-0 m-0 font-medium">
-          <span class="font-extralight">Array</span>FTW
+          <span className="font-extralight">Array</span>FTW
         </h2>
         <h4 className="text-center max-w-[80%] mx-auto  mt-6 tracking-wide leading-5 md:leading-6 text-sm md:text-base">
           ArrayFTW is a free course about teaching you how to <br />
@@ -66,7 +94,7 @@ export default function App() {
           <br />
           Because the internet is just lists and forms
         </h4>
-        <form className="mt-8 sm:flex mx-auto">
+        <form className="mt-8 sm:flex mx-auto" onSubmit={submitForm}>
           <label htmlFor="emailAddress" className="sr-only">
             Email address
           </label>
@@ -75,6 +103,8 @@ export default function App() {
             name="email"
             type="email"
             autoComplete="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
             className={`
               w-full px-5 py-3 placeholder-gray-500 focus:ring-white focus:border-white sm:max-w-xs border-none rounded-md

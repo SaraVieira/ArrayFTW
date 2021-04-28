@@ -6,18 +6,22 @@ import React, { useRef } from 'react'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
+import usePrefersReducedMotion from './Hooks/usePreferesReducedMotion'
 
 export default function Model(props) {
   const group = useRef()
+  const prefersReducedMotion = usePrefersReducedMotion()
   const { nodes } = useGLTF('/array-processed.glb')
 
   useFrame((state) => {
-    group.current.children.forEach((child, index) => {
-      child.position.y += Math.sin(index * 1000 + state.clock.elapsedTime) / 50
-      child.rotation.x += (Math.sin(index * 1000 + state.clock.elapsedTime) * Math.PI) / 2000
-      child.rotation.y += (Math.cos(index * 1000 + state.clock.elapsedTime) * Math.PI) / 3000
-      child.rotation.z += (Math.sin(index * 1000 + state.clock.elapsedTime) * Math.PI) / 4000
-    })
+    if (!prefersReducedMotion) {
+      group.current.children.forEach((child, index) => {
+        child.position.y += Math.sin(index * 1000 + state.clock.elapsedTime) / 50
+        child.rotation.x += (Math.sin(index * 1000 + state.clock.elapsedTime) * Math.PI) / 2000
+        child.rotation.y += (Math.cos(index * 1000 + state.clock.elapsedTime) * Math.PI) / 3000
+        child.rotation.z += (Math.sin(index * 1000 + state.clock.elapsedTime) * Math.PI) / 4000
+      })
+    }
   })
 
   const material = props.dark

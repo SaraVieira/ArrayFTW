@@ -42,3 +42,32 @@ form {
 a {
   color: #101015;
 }
+@keyframes comeInOut {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .spark-container {
+    animation: comeInOut 700ms forwards;
+  }
+  .spark-svg {
+    animation: spin 1000ms linear;
+  }
+}

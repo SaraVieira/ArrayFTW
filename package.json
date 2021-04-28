@@ -1,30 +1,21 @@
 {
-  "name": "baked-ao",
+  "name": "arrayftw",
   "version": "1.0.0",
-  "description": "Making the contents of a GLTF float and some Blender baking.",
-  "keywords": [
-    "baked",
-    "ambient-occlusion",
-    "floating"
-  ],
   "main": "src/index.js",
   "dependencies": {
     "@craco/craco": "^6.1.2",
     "@react-three/drei": "4.0.3",
     "@react-three/fiber": "6.0.7",
     "@tailwindcss/forms": "^0.3.2",
-    "@types/three": "0.127.0",
-    "autoprefixer": "^9",
-    "postcss": "^7",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-scripts": "4.0.3",
-    "styled-components": "^5.2.3",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "three": "0.127.0"
   },
   "devDependencies": {
-    "typescript": "3.8.3"
+    "react-scripts": "4.0.3",
+    "autoprefixer": "^9",
+    "postcss": "^7"
   },
   "scripts": {
     "start": "craco start",
