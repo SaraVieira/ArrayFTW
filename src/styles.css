@@ -17,6 +17,19 @@ body {
   color: #101015;
 }
 
+* {
+  transition: all 200ms ease;
+}
+
+body.dark {
+  background: linear-gradient(155deg, #000000 20%, #272727);
+  color: rgb(226, 226, 226);
+}
+
+body.dark a {
+  color: rgb(226, 226, 226);
+}
+
 .overlay {
   height: 100%;
   width: 100%;
@@ -29,7 +42,11 @@ body {
   justify-content: center;
   align-items: center;
 }
-
+a,
+button,
+form {
+  pointer-events: all;
+}
 a {
   pointer-events: all;
   position: absolute;
@@ -66,4 +83,16 @@ h2 {
   font-size: 0.9em;
   line-height: 1.4em;
   letter-spacing: 2px;
+}
+
+button {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 3em;
+  }
 }

@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import React, { Suspense, useRef } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { ContactShadows } from '@react-three/drei'
 import Model from './Model'
@@ -14,6 +14,15 @@ function Rig({ children }) {
 }
 
 export default function App() {
+  const [dark, setDark] = useState(false)
+
+  useEffect(() => {
+    if (dark) {
+      document.body.classList.add('dark')
+    } else {
+      document.body.classList.remove('dark')
+    }
+  }, [dark])
   return (
     <>
       <Canvas camera={{ position: [0, -10, 65], fov: 50 }} dpr={[1, 2]}>
@@ -22,7 +31,7 @@ export default function App() {
         <Suspense fallback={null}>
           <group position={[0, 10, 0]}>
             <Rig>
-              <Model url="/compressed.glb" />
+              <Model rotation={[0, -Math.PI / 4, 0]} dark={dark} />
             </Rig>
             <ContactShadows
               rotation-x={Math.PI / 2}
@@ -37,11 +46,11 @@ export default function App() {
         </Suspense>
       </Canvas>
       <div class="overlay">
-        <a href="https://docs.pmnd.rs/react-three-fiber/examples/showcase">
-          <b>pmnd.rs</b>
+        <a href="/">
+          <b>arrayftw.com</b>
         </a>
-        <a class="right" href="https://codesandbox.io/s/baked-ao-f5sgi">
-          /me
+        <a class="right" target="_blank" href="https://twitter.com/NikkitaFTW">
+          /instructor
         </a>
         <h1>
           <span>Array</span>FTW
@@ -52,6 +61,8 @@ export default function App() {
           <br />
           Because the internet is just lists and forms
         </h2>
+
+        <button onClick={() => setDark((d) => !d)}>Dark Mode?</button>
       </div>
     </>
   )
