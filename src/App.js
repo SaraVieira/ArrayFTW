@@ -22,7 +22,7 @@ function Rig({ children }) {
 
 export default function App() {
   const [dark, setDark] = useState(false)
-  const [done, setDone] = useState(true)
+  const [done, setDone] = useState(false)
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [_, setError] = useState(false)
@@ -79,9 +79,7 @@ export default function App() {
         </Suspense>
       </Canvas>
       <main className="w-full h-full absolute top-0 left-0 flex justify-center align-center flex-col pointer-events-none">
-        <h1 href="/" className="absolute left-5 top-5 md:left-10 md:top-10 right-auto font-bold">
-          arrayftw.com
-        </h1>
+        <h1 className="absolute left-5 top-5 md:left-10 md:top-10 right-auto font-bold">arrayftw.com</h1>
         <a
           className="absolute right-5 top-5 md:right-10 md:top-10 left-auto"
           target="_blank"
