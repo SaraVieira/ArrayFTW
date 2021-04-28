@@ -92,7 +92,8 @@ export default function App() {
           ArrayFTW is a free course about teaching you how to <br />
           manipulate objects and arrays in JavaScript
           <br />
-          Because the internet is just lists and forms
+          Because the internet is just lists and forms.
+          <br />
         </h4>
         <form className="mt-8 sm:flex mx-auto" onSubmit={submitForm}>
           <label htmlFor="emailAddress" className="sr-only">
@@ -106,7 +107,7 @@ export default function App() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className={`
+            className={`transition duration-1000 shadow 
               w-full px-5 py-3 placeholder-gray-500 focus:ring-white focus:border-white sm:max-w-xs border-none rounded-md
               ${dark ? ' bg-gray-100 text-gray-800' : ' bg-gray-800 text-gray-100'}`}
             placeholder="Enter your email"
@@ -114,8 +115,8 @@ export default function App() {
           <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0">
             <button
               type="submit"
-              className={`w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white ${
-                dark ? ' bg-gray-100 text-gray-800' : ' bg-gray-800'
+              className={`shadow transition duration-1000 w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md  hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white ${
+                dark ? 'bg-gray-100 text-gray-800' : 'text-white bg-gray-800'
               }`}>
               Notify me
             </button>
