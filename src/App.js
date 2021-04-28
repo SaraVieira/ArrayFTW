@@ -45,25 +45,29 @@ export default function App() {
           </group>
         </Suspense>
       </Canvas>
-      <div class="overlay">
-        <a href="/">
+      <main class="w-full h-full absolute top-0 left-0 flex justify-center align-center flex-col">
+        <a href="/" className="absolute left-5 top-5 md:left-10 md:top-10 right-auto">
           <b>arrayftw.com</b>
         </a>
-        <a class="right" target="_blank" href="https://twitter.com/NikkitaFTW">
+        <a
+          className="absolute right-5 top-5 md:right-10 md:top-10 left-auto"
+          target="_blank"
+          href="https://twitter.com/NikkitaFTW">
           /instructor
         </a>
-        <h1>
-          <span>Array</span>FTW
+        <h1 className="text-3xl md:text-7xl text-center uppercase p-0 m-0 font-medium">
+          <span class="font-extralight">Array</span>FTW
         </h1>
-        <h2>
+        <h2 className="text-center max-w-[80%] mx-auto  mt-6 tracking-wide leading-5 md:leading-6 text-sm md:text-base">
           ArrayFTW is a free course about teaching you how to <br />
           manipulate objects and arrays in JavaScript
           <br />
           Because the internet is just lists and forms
         </h2>
-
-        <button onClick={() => setDark((d) => !d)}>Dark Mode?</button>
-      </div>
+        <button className="absolute right-5 bottom-5 md:right-10 md:bottom-10" onClick={() => setDark((d) => !d)}>
+          Dark Mode?
+        </button>
+      </main>
     </>
   )
 }
