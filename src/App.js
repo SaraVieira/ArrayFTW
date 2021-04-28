@@ -31,7 +31,7 @@ export default function App() {
         <Suspense fallback={null}>
           <group position={[0, 10, 0]}>
             <Rig>
-              <Model rotation={[0, -Math.PI / 4, 0]} dark={dark} />
+              <Model rotation={[0, -Math.PI / 2, 0]} dark={dark} />
             </Rig>
             <ContactShadows
               rotation-x={Math.PI / 2}

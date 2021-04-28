@@ -19,43 +19,25 @@ export default function Model(props) {
     })
   })
 
-  const Material = new THREE.MeshPhysicalMaterial({
-    color: '#0a0a0a',
-    roughness: 0.8,
-  })
+  const material = props.dark
+    ? new THREE.MeshPhysicalMaterial({
+        color: '#0a0a0a',
+        roughness: 0.8,
+      })
+    : nodes.Curve001.material
 
   return (
     <group ref={group} {...props} dispose={null}>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Cube007.geometry}
-        material={props.dark ? Material : nodes.Cube007.material}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Text.geometry}
-          material={props.dark ? Material : nodes.Text.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Text001.geometry}
-          material={props.dark ? Material : nodes.Text001.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Text002.geometry}
-          material={props.dark ? Material : nodes.Text002.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Text003.geometry}
-          material={props.dark ? Material : nodes.Text003.material}
-        />
+      <mesh castShadow receiveShadow geometry={nodes.Cube007.geometry} material={material}>
+        <mesh castShadow receiveShadow geometry={nodes.Text.geometry} material={material} />
+        <mesh castShadow receiveShadow geometry={nodes.Text001.geometry} material={material} />
+        <mesh castShadow receiveShadow geometry={nodes.Text002.geometry} material={material} />
+        <mesh castShadow receiveShadow geometry={nodes.Text003.geometry} material={material} />
       </mesh>
+      <mesh castShadow receiveShadow geometry={nodes.Plane.geometry} material={material} />
+      <mesh castShadow receiveShadow geometry={nodes.Cube.geometry} material={material} />
+      <mesh castShadow receiveShadow geometry={nodes.Curve.geometry} material={material} />
+      <mesh castShadow receiveShadow geometry={nodes.Curve001.geometry} material={material} />
     </group>
   )
 }

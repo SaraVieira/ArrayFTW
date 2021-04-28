@@ -1,4 +1,7 @@
 @import url('https://rsms.me/inter/inter.css');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html,
 body,
@@ -77,12 +80,13 @@ h1 > span {
 }
 
 h2 {
-  margin-top: 1em;
   text-align: center;
   font-weight: 400;
   font-size: 0.9em;
   line-height: 1.4em;
   letter-spacing: 2px;
+  max-width: 80%;
+  margin: 1em auto;
 }
 
 button {
