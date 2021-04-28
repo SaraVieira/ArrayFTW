@@ -5,6 +5,7 @@ import { ContactShadows } from '@react-three/drei'
 import Model from './Model'
 import Sparkles from './Components/Sparkles'
 import usePrefersReducedMotion from './Hooks/usePreferesReducedMotion'
+import Loading from './Components/Loading'
 
 function Rig({ children }) {
   const ref = useRef()
@@ -24,7 +25,7 @@ export default function App() {
   const [done, setDone] = useState(true)
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
+  const [_, setError] = useState(false)
 
   useEffect(() => {
     if (dark) {
@@ -35,10 +36,11 @@ export default function App() {
   }, [dark])
 
   const submitForm = async (e) => {
+    e.preventDefault()
+    if (done || loading) return
     setError(false)
     setLoading(true)
     try {
-      e.preventDefault()
       await fetch('https://app.convertkit.com/forms/2236430/subscriptions', {
         method: 'POST',
         headers: {
@@ -47,6 +49,7 @@ export default function App() {
         body: `email_address=${email}`,
       })
       setLoading(false)
+      setDone(true)
     } catch {
       setLoading(false)
       setError(true)
@@ -94,6 +97,8 @@ export default function App() {
           <br />
           Because the internet is just lists and forms.
           <br />
+          <br />
+          Want to know when it's out and get updates?
         </h4>
         <form className="mt-8 sm:flex mx-auto" onSubmit={submitForm}>
           <label htmlFor="emailAddress" className="sr-only">
@@ -109,16 +114,38 @@ export default function App() {
             required
             className={`transition duration-1000 shadow 
               w-full px-5 py-3 placeholder-gray-500 focus:ring-white focus:border-white sm:max-w-xs border-none rounded-md
-              ${dark ? ' bg-gray-100 text-gray-800' : ' bg-gray-800 text-gray-100'}`}
-            placeholder="Enter your email"
+              ${dark ? ' bg-gray-100 text-gray-800' : ' bg-gray-800 text-gray-100'} ${done || loading ? 'hidden' : ''}`}
+            placeholder="email for the goodies"
           />
-          <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0">
+          <div className={`mt-3 rounded-md shadow sm:mt-0 sm:ml-3 ${done || loading ? '' : 'sm:flex-shrink-0'}`}>
             <button
               type="submit"
               className={`shadow transition duration-1000 w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md  hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white ${
                 dark ? 'bg-gray-100 text-gray-800' : 'text-white bg-gray-800'
               }`}>
-              Notify me
+              {loading && 'Subscribing you'}
+              {done && 'Thank you!'}
+              {!done && !loading && 'Subscribe'}
+              {loading || done ? (
+                <span className="ml-4">
+                  {loading && <Loading />}
+                  {done && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-red-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                      />
+                    </svg>
+                  )}
+                </span>
+              ) : null}
             </button>
           </div>
         </form>
