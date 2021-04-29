@@ -148,7 +148,7 @@ export default function App() {
           </div>
         </form>
 
-        <div className="absolute right-5 bottom-5 md:right-10 md:bottom-10">
+        <div className={`absolute right-5 bottom-5 md:right-10 md:bottom-10 rounded p-3 ${dark ? 'bg-white text-gray-800': "bg-gray-800 text-white"}`}>
           <Sparkles>
             <button onClick={() => setDark((d) => !d)}>{dark ? 'Light' : 'Dark'} Mode</button>
           </Sparkles>
