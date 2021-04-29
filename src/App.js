@@ -78,15 +78,15 @@ export default function App() {
           </group>
         </Suspense>
       </Canvas>
-      <main className="w-full h-full absolute top-0 left-0 flex justify-center align-center flex-col pointer-events-none">
-        <h1 className="absolute left-5 top-5 md:left-10 md:top-10 right-auto font-bold">arrayftw.com</h1>
+      <main className="absolute top-0 left-0 flex flex-col justify-center w-full h-full pointer-events-none align-center">
+        <h1 className="absolute right-auto font-bold left-5 top-5 md:left-10 md:top-10">arrayftw.com</h1>
         <a
-          className="absolute right-5 top-5 md:right-10 md:top-10 left-auto"
+          className="absolute left-auto right-5 top-5 md:right-10 md:top-10"
           target="_blank"
           href="https://twitter.com/NikkitaFTW">
           /instructor
         </a>
-        <h2 className="text-3xl md:text-7xl text-center uppercase p-0 m-0 font-medium">
+        <h2 className="p-0 m-0 text-3xl font-medium text-center uppercase md:text-7xl">
           <span className="font-extralight">Array</span>FTW
         </h2>
         <h4 className="text-center max-w-[80%] mx-auto  mt-6 tracking-wide leading-5 md:leading-6 text-sm md:text-base">
@@ -98,7 +98,7 @@ export default function App() {
           <br />
           Want to know when it's out and get updates?
         </h4>
-        <form className="mt-8 sm:flex mx-auto" onSubmit={submitForm}>
+        <form className="mx-auto mt-8 sm:flex" onSubmit={submitForm}>
           <label htmlFor="emailAddress" className="sr-only">
             Email address
           </label>
@@ -130,7 +130,7 @@ export default function App() {
                   {done && (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-red-500"
+                      className="w-6 h-6 text-red-500"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor">
@@ -148,10 +148,14 @@ export default function App() {
           </div>
         </form>
 
-        <div className={`absolute right-5 bottom-5 md:right-10 md:bottom-10 rounded p-3 ${dark ? 'bg-white text-gray-800': "bg-gray-800 text-white"}`}>
-          <Sparkles>
-            <button onClick={() => setDark((d) => !d)}>{dark ? 'Light' : 'Dark'} Mode</button>
-          </Sparkles>
+        <div className={`absolute right-5 bottom-5`}>
+          <button
+            className={`shadow transition duration-1000 w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md  ${
+              dark ? 'bg-gray-100 text-gray-800' : 'text-white bg-gray-800'
+            }`}
+            onClick={() => setDark((d) => !d)}>
+            <Sparkles>{dark ? 'Light' : 'Dark'} Mode</Sparkles>
+          </button>
         </div>
       </main>
     </>
