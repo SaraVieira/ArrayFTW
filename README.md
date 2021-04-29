@@ -1,7 +1,7 @@
 # ArrayFTW
 
 
-Creadted using Craco, tailwind and react three fiber
+Created using Craco, Tailwind and react-three-fiber
 
 
 You can download the blend file with the models used here 
